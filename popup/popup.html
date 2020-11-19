@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Ebay Inserting Extension</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="popup.css">
+    </head>
+
+    <body>
+
+
+        <form id="popup_form" action="#">
+            <label>
+                <span>Title</span>
+                <input type="text" id="product_title" placeholder="Visit an Amazon Item" maxlength = "80">
+            </label>
+            <label>
+                <span>Price +15%</span>
+                <input type="text" id="product_price" placeholder="-9999">
+            </label>
+
+            <button type="submit">List on Ebay</button>
+            
+        </form>
+
+
+
+        <form id="main_form">
+            <label>
+            <h4><span id = "skuFound">SkuFound: 0</span> </h4>
+            <button id="main_button">Get Active SKU List: </button>
+        </label>
+        </form>
+
+
+
+
+
+    <br>
+    <br>
+    <br>
+
+
+        
+    <textarea id="img-base64" cols="30" rows="5"></textarea>
+    <br />
+    <button id='test-btn'>Upload Img B64</button>
+
+
+
+        <script src="popup.js"></script>
+    </body>
+
+    
+
+</html>

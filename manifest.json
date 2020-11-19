@@ -1,0 +1,112 @@
+{
+  "manifest_version": 2,
+  "name": "Ebay Lister 2",
+  "version": "1.4",
+  "permissions": [
+    "*://amazon.ca/*",
+    "*://amazon.com/*",
+    "*://ebay.ca/*",
+    "*://*.amazon.ca/*",
+    "*://*.amazon.com/*",
+    "*://*.ebay.ca/*",
+    "storage",
+    "tabs",
+    "file:///*/",
+
+
+    "webRequest",
+    "activeTab",
+    "webRequestBlocking",
+    "clipboardRead",
+    "clipboardWrite",
+    "contentSettings",
+    "contextMenus",
+    "cookies",
+    "history",
+    "https://*.ebay.ca/* ",
+    "https://cors-anywhere.herokuapp.com/*"
+
+
+  ],
+
+  "options_page": "options/options.html",
+  
+  "icons":{
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png" 
+  },
+  "content_scripts": [
+
+
+    {
+      "matches": ["https://*.picupload.ebay.ca/*"],
+      "js": ["/js/content.min.js"],
+      "all_frames": true
+    }, 
+
+    {
+      "all_frames": true,
+      "matches": ["*://bulksell.ebay.ca/ws/*", "*://*.picupload.ebay.ca/*"],
+      "js": [
+        "libraries/jquery.min.js",
+        "libraries/htmlSanitizer.js",
+        "libraries/custom.functions.js",
+         "ebay/ebay.functions.js",
+         "ebay/ebay.desc_function.js",
+         "ebay/ebay.image_functions.js",
+         "ebay/ebay.paste_draft_function.js",
+          "ebay/ebay.js"],
+      "css": ["ebay/ebay.css"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["*://amazon.ca/*", "*://*.amazon.ca/*", "*://amazon.com/*", "*://*.amazon.com/*"],
+      "js": [
+        "libraries/jquery.min.js",
+        "libraries/jquery-ui.min.js",
+        "libraries/htmlSanitizer.js",
+        "libraries/custom.functions.js",
+
+        "amazon/amazon_vero_list_new.js",
+        "amazon/amazon_vero_list_old.js",
+        "amazon/amazon_vero_list_personal.js",
+        "amazon/amazon_vero_list_from_ebay.js",
+
+        
+
+      
+
+         "amazon/amazon.desc_template.js",
+         "amazon/amazon.functions.js",
+         "amazon/amazon.img_function.js",
+          "amazon/amazon.js",
+
+          "amazon/amazon_vero_function.js",
+          "amazon/amazon_check_duplicate.js",
+          "amazon/amazon_title_builder.js"
+        
+        
+        ],
+        "css": ["amazon/amazon_title_builder.css"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://www.ebay.ca/sh/lst/active*"],
+      "js": ["libraries/jquery.min.js","ebay/ebay.active_listings.js"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "web_accessible_resources": ["js/iframe_inject.min.js"],
+
+
+  "browser_action": {
+    "default_icon": "ebay-icon.png",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": ["background/background.config.js", "background/background.functions.js", "background/background.js", "background/background.tracker.js", "background/background_image_upload.js"]
+    
+  }
+}
