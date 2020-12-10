@@ -1,7 +1,7 @@
 console.log("bg_img_upload start");
 
-var imgHeight = 400;
-var imgWidth = 400;
+var imgHeight = 500;
+var imgWidth = 500;
 
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -36,7 +36,7 @@ async function upload_first_image(payload) {
 
   var fontType = "Ariel Unicode MS";
   var fontColor = payload.color;
-  var ebayTab = await get_ebay_tab_id();
+
 
 
   var img = await create_first_image(
@@ -46,7 +46,7 @@ async function upload_first_image(payload) {
     imgHeight
   );
 
-  await upload_image(img.src, payload.name, ebayTab);
+  await upload_image(img.src, payload.name, payload.ebayTab);
   return "uploaded_first_image";
 }
 
@@ -81,11 +81,9 @@ async function upload_normal_image(payload) {
   var fontType = "Ariel Unicode MS";
   var fontColor = payload.color;
 
-  var ebayTab = await get_ebay_tab_id();
-
   var img = await create_normal_image(payload.imgUrl, imgWidth, imgHeight);
 
-  await upload_image(img.src, payload.name, ebayTab);
+  await upload_image(img.src, payload.name, payload.ebayTab);
   return "uploaded_normal_image";
 }
 
@@ -115,13 +113,15 @@ async function upload_multi_image(payload) {
     fontType
   );
 
-  var ebayTab = await get_ebay_tab_id();
-  await upload_image(img.src, payload.name, ebayTab);
+
+  console.log("uploading multiImage with payload",payload);
+  await upload_image(img.src, payload.name, payload.ebayTab);
   return "uploaded_multi_image";
 }
 
 function upload_image(b64Image, imageTitle, ebayTab) 
 {
+  console.log("upload_image ebayTab: ",ebayTab );
   return new Promise((resolve, reject) => 
   {
     var imgName = imageTitle + ".jpg";

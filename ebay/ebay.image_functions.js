@@ -18,7 +18,20 @@ function convertImgToBase64(url, callback, outputFormat) {
   img.src = url;
 }
 
+function get_ebay_tab_id() {
+	return new Promise((resolve, reject) => {
+	  chrome.storage.local.get("ebayTab", (response) => {
+		resolve(response.ebayTab);
+	  });
+	});
+}
+
 async function uploadImages(product) {
+
+	var ebayTab = await get_ebay_tab_id();
+	console.log("ebayTab:",ebayTab);
+	
+
   //var imgUrls = product.main_sd_images;
   var sdImgs = product.main_sd_images;
   var hdImgs = product.main_hd_images;
@@ -63,8 +76,8 @@ async function uploadImages(product) {
 
   
 
-  await uploadMultiImage(imgName,imgUrls,color);
-  await uploadFirstImage(imgName,imgUrls[0]);
+  await uploadMultiImage(ebayTab, imgName,imgUrls,color);
+  await uploadFirstImage(ebayTab, imgName,imgUrls[0]);
 
 
 
@@ -75,7 +88,7 @@ async function uploadImages(product) {
 
 	  if(i < 10)
 	  {
-		await uploadNormalImage(imgName,imgUrl);
+		await uploadNormalImage(ebayTab, imgName,imgUrl);
 	  }
 
 	  
@@ -91,7 +104,7 @@ async function uploadImages(product) {
   );
 }
 
-function uploadFirstImage(imgName,imgUrl){
+function uploadFirstImage(ebayTab, imgName,imgUrl){
 	updateImageCounter();
 	turnOnLoader();
 
@@ -106,10 +119,12 @@ function uploadFirstImage(imgName,imgUrl){
 			{
 			  from: "ebay_draft",
 			  type: "upload_first_img",
+
 			  payload: {
 				name: imgName,
 				imgUrl: imgUrl,
 				imgVariation: "first_image",
+				ebayTab:ebayTab,
 			  },
 			},
 			function (response) 
@@ -128,7 +143,7 @@ function uploadFirstImage(imgName,imgUrl){
 	});
 }
 
-function uploadNormalImage(imgName,imgUrl){
+function uploadNormalImage(ebayTab,imgName,imgUrl){
 
 	updateImageCounter();
 	turnOnLoader();
@@ -141,10 +156,12 @@ function uploadNormalImage(imgName,imgUrl){
 			{
 			  from: "ebay_draft",
 			  type: "upload_normal_img",
+			
 			  payload: {
 				name: imgName,
 				imgUrl: imgUrl,
 				imgVariation: "other_image",
+				ebayTab:ebayTab,
 			  },
 			},
 			function (response) 
@@ -167,7 +184,7 @@ function uploadNormalImage(imgName,imgUrl){
 }
 
 
-function uploadMultiImage(imgName,imgUrls,color) 
+function uploadMultiImage(ebayTab, imgName,imgUrls,color) 
 {
 	updateImageCounter();
 	turnOnLoader();
@@ -178,6 +195,7 @@ function uploadMultiImage(imgName,imgUrls,color)
 			{
 			  from: "ebay_draft",
 			  type: "upload_multi_img",
+			  ebayTab: ebayTab,
 			  payload: {
 				name: imgName,
 				imgUrl: {
@@ -186,6 +204,7 @@ function uploadMultiImage(imgName,imgUrls,color)
 				},
 				color: color,
 				imgVariation: "multi_image",
+				ebayTab:ebayTab,
 			  },
 			},
 			function (response) 
