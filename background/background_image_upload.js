@@ -1,5 +1,9 @@
 console.log("bg_img_upload start");
 
+var imgHeight = 400;
+var imgWidth = 400;
+
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log(
     sender.tab
@@ -29,11 +33,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 });
 
 async function upload_first_image(payload) {
-  var imgHeight = 1500;
-  var imgWidth = 1500;
+
   var fontType = "Ariel Unicode MS";
   var fontColor = payload.color;
   var ebayTab = await get_ebay_tab_id();
+
 
   var img = await create_first_image(
     payload.imgUrl,
@@ -74,8 +78,6 @@ async function create_first_image(
 }
 
 async function upload_normal_image(payload) {
-  var imgHeight = 1500;
-  var imgWidth = 1500;
   var fontType = "Ariel Unicode MS";
   var fontColor = payload.color;
 
@@ -99,8 +101,7 @@ async function create_normal_image(imageSource, imgWidth, imgHeight) {
 }
 
 async function upload_multi_image(payload) {
-  var imgHeight = 1500;
-  var imgWidth = 1500;
+
   var fontType = "Ariel Unicode MS";
   var fontColor = payload.color;
 
