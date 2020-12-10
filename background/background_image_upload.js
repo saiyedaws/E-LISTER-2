@@ -159,6 +159,7 @@ async function create_multi_image(
   fontColor,
   fontType
 ) {
+  console.log("\n");
   console.log("creating multi image");
   //console.log(imageSource);
   //console.log(sideImageUrl);
@@ -168,31 +169,62 @@ async function create_multi_image(
 
   var waterMarkUrl = localStorage.getItem("waterMarkUrl");
 
+
+  console.log("Converting ImgSource to img...",imageSource);
   var img = await urlToImage(imageSource);
+  console.log("Obtained Img");
+ 
+
   //img = await flipImage(img);
   //img = await rotateImage(img, 5);
+  console.log("Resizing Img...");
   img = await resizeImage(img, imgWidth, imgHeight);
+  console.log("Resized Img");
 
+
+  console.log("converting watermark to Img...");
   var imgWatermark = await urlToImage(waterMarkUrl);
+  console.log("converting watermark to Img");
+
+
+  console.log("resizing watermark...");
   imgWatermark = await resizeImage(
     imgWatermark,
     imgHeight * 0.45,
     imgWidth * 0.45
   );
+  console.log("resized watermark");
 
+
+  console.log("adding watermark to img...");
   img = await addLogo(img, imgWatermark, 0.75);
+  console.log("added watermark to img");
 
+  console.log("converting sideImageUrl to Img...");
   var sideImg = await urlToImage(sideImageUrl);
+  console.log("converted sideImageUrl to Img");
 
+  console.log("adding box to sideImage...");
   sideImg = await addBoxToImage(sideImg);
+  console.log("added box to sideImage");
 
   //sideImg = await flipImage(sideImg);
   //sideImg = await rotateImage(sideImg, 10);
 
+  console.log("resizing sideImage...");
   sideImg = await resizeImage(sideImg, imgHeight * 0.45, imgWidth * 0.45);
+  console.log("resized sideImage");
 
+  console.log("adding sideImage to img...");
   img = await addSideImage(img, sideImg, 0.95);
+  console.log("added sideImage to img");
+
+
+
+
+  console.log("adding text to img...");
   img = await addTextToImage(img, imageTitle, fontColor, fontType);
+  console.log("added text to img...");
 
   console.log("Created Multi Image");
   return img;
