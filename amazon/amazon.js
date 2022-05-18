@@ -39,7 +39,7 @@ if(isProductPage())
         };
 
 
-    console.log(product_data);
+    console.log("product_data",product_data);
 
 
     // Save the product to storage

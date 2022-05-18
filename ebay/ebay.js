@@ -54,6 +54,8 @@ if(window.location.href.includes("DraftURL"))
         //Paste brand showing original Brand
         pasteBrand(product);
        // pasteNAToRequiredItemSpecifics();
+
+       selectFormat("FixedPrice");
         
         pasteItemSpecifics(product);
 

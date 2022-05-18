@@ -665,3 +665,248 @@ function rotateImage(img, angle) {
 		imgFinal.src = canvas.toDataURL();
 	});
 }
+
+
+function addTopLeftImage(img, imageToAdd, opacity) 
+{
+	return new Promise(function (resolve, reject) {
+		let canvas = document.createElement("canvas");
+		canvas.width = img.width + imageToAdd.width;
+		canvas.height = img.height;
+
+		let ctx = canvas.getContext("2d");
+		ctx.fillStyle = "white";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		var imageToAddWidth = imageToAdd.width *0.9;
+		var imageToAddHeight = imageToAdd.height *0.9;
+
+		ctx.drawImage(img, imageToAddWidth, 0);
+
+		ctx.globalAlpha = opacity;
+
+	
+		var x = 0 + (canvas.width/50);
+
+		ctx.drawImage(imageToAdd, x,  0, imageToAddWidth ,imageToAddHeight);
+
+	//	ctx.drawImage(imgWatermark, canvas.width - imgWatermark.width, 0-(canvas.height/10.75), imgWatermark.width ,imgWatermark.height);
+		
+	
+
+		//ctx.drawImage(imgWatermark, canvas.width - imgWaterMarkWidth,  0, imgWaterMarkWidth ,imgWaterMarkHeight);
+
+
+		var imgFinal = new Image();
+
+		imgFinal.onload = function () {
+			resolve(imgFinal);
+		};
+		imgFinal.src = canvas.toDataURL();
+	});
+}
+
+
+function addTopRightImage(img, imageToAdd, opacity) 
+{
+	return new Promise(function (resolve, reject) {
+		let canvas = document.createElement("canvas");
+		canvas.width = img.width + imageToAdd.width;
+		canvas.height = img.height;
+
+		let ctx = canvas.getContext("2d");
+		ctx.fillStyle = "white";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		ctx.drawImage(img, 0, 0);
+
+		ctx.globalAlpha = opacity;
+
+		var imageToAddWidth = imageToAdd.width *0.9;
+		var imageToAddHeight = imageToAdd.height *0.9;
+
+		ctx.drawImage(imageToAdd, canvas.width - imageToAddWidth,  0, imageToAddWidth ,imageToAddHeight);
+
+	
+
+		var imgFinal = new Image();
+
+		imgFinal.onload = function () {
+			resolve(imgFinal);
+		};
+		imgFinal.src = canvas.toDataURL();
+	});
+}
+
+
+function addBottomRightImage(img, imageToAdd, opacity) 
+{
+	return new Promise(function (resolve, reject) {
+		let canvas = document.createElement("canvas");
+		canvas.width = img.width;
+		canvas.height = img.height;
+
+		let ctx = canvas.getContext("2d");
+		ctx.fillStyle = "white";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		ctx.drawImage(img, 0, 0);
+
+    ctx.globalAlpha = opacity;
+    
+
+//bigger denominator makes it go right
+var x = canvas.width - imageToAdd.width - (canvas.width/50);
+	
+//bigger denominator makes it go down
+var y = canvas.height - imageToAdd.height - (canvas.height/12);
+	
+	//var y = canvas.height - sideImg.height ;
+    
+
+    ctx.drawImage(imageToAdd, x, y);
+
+	//drawing Border
+	/*
+    ctx.strokeStyle = 'black';  // some color/style
+    ctx.lineWidth = 5;         // thickness
+	ctx.strokeRect(x, y, sideImg.width-10, sideImg.height);
+	*/
+
+    //drawing Border
+    
+
+
+
+		var imgFinal = new Image();
+
+		imgFinal.onload = function () {
+			resolve(imgFinal);
+		};
+		imgFinal.src = canvas.toDataURL();
+	});
+}
+
+
+function addBottomLeftImage(img, imageToAdd, opacity) 
+{
+	return new Promise(function (resolve, reject) {
+		let canvas = document.createElement("canvas");
+		canvas.width = img.width;
+		canvas.height = img.height;
+
+		let ctx = canvas.getContext("2d");
+		ctx.fillStyle = "white";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		ctx.drawImage(img, 0, 0);
+
+    ctx.globalAlpha = opacity;
+    
+
+//bigger denominator makes it go right
+var x = 0 + (canvas.width/50);
+	
+//bigger denominator makes it go down
+var y = canvas.height - imageToAdd.height - (canvas.height/12);
+	
+	//var y = canvas.height - sideImg.height ;
+    
+
+    ctx.drawImage(imageToAdd, x, y);
+
+	//drawing Border
+	/*
+    ctx.strokeStyle = 'black';  // some color/style
+    ctx.lineWidth = 5;         // thickness
+	ctx.strokeRect(x, y, sideImg.width-10, sideImg.height);
+	*/
+
+    //drawing Border
+    
+
+
+
+		var imgFinal = new Image();
+
+		imgFinal.onload = function () {
+			resolve(imgFinal);
+		};
+		imgFinal.src = canvas.toDataURL();
+	});
+}
+
+
+function changeOpacityFix(img, opacity) 
+{
+	return new Promise(function (resolve, reject) {
+		let canvas = document.createElement("canvas");
+		canvas.width = img.width;
+		canvas.height = img.height;
+
+		let ctx = canvas.getContext("2d");
+		ctx.fillStyle = "white";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		ctx.globalAlpha = opacity;
+
+		ctx.drawImage(img, 0, 0);
+
+	
+
+	//	var imgWaterMarkWidth = imgWatermark.width *0.9;
+		//var imgWaterMarkHeight = imgWatermark.height *0.9;
+
+	//	ctx.drawImage(imgWatermark, canvas.width - imgWaterMarkWidth,  0, imgWaterMarkWidth ,imgWaterMarkHeight);
+
+	//	ctx.drawImage(imgWatermark, canvas.width - imgWatermark.width, 0-(canvas.height/10.75), imgWatermark.width ,imgWatermark.height);
+		
+	
+
+		//ctx.drawImage(imgWatermark, canvas.width - imgWaterMarkWidth,  0, imgWaterMarkWidth ,imgWaterMarkHeight);
+
+
+		var imgFinal = new Image();
+
+		imgFinal.onload = function () {
+			resolve(imgFinal);
+		};
+		imgFinal.src = canvas.toDataURL();
+	});
+}
+
+function changeOpacity(img, opacity) 
+{
+	return new Promise(function (resolve, reject) {
+		let canvas = document.createElement("canvas");
+		canvas.width = img.width + imgWatermark.width;
+		canvas.height = img.height;
+
+		let ctx = canvas.getContext("2d");
+		ctx.fillStyle = "white";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		ctx.globalAlpha = opacity;
+
+		ctx.drawImage(img, 0, 0);
+
+	
+
+		var imgWaterMarkWidth = imgWatermark.width *0.9;
+		var imgWaterMarkHeight = imgWatermark.height *0.9;
+
+		ctx.drawImage(imgWatermark, canvas.width - imgWaterMarkWidth,  0, imgWaterMarkWidth ,imgWaterMarkHeight);
+
+	//	ctx.drawImage(imgWatermark, canvas.width - imgWatermark.width, 0-(canvas.height/10.75), imgWatermark.width ,imgWatermark.height);
+		
+	
+
+		//ctx.drawImage(imgWatermark, canvas.width - imgWaterMarkWidth,  0, imgWaterMarkWidth ,imgWaterMarkHeight);
+
+
+		var imgFinal = new Image();
+
+		imgFinal.onload = function () {
+			resolve(imgFinal);
+		};
+		imgFinal.src = canvas.toDataURL();
+	});
+}

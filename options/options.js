@@ -14,6 +14,10 @@ function saveWaterMarkImage()
 
   document.getElementById('saveWaterMarkImage').addEventListener('click', saveWaterMarkImage);
 
+
+  document.getElementById('corsAnyWhere').addEventListener('click', saveWaterMarkImage);
+
+
   
   addImageToDom();
 

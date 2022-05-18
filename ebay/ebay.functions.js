@@ -1,6 +1,8 @@
 
 function pastePrice(product) {
 	// Sets price
+
+	
 	document.querySelector("input#binPrice").value = product.custom_price;
 
 	// Finds field with selling format and sets it fixed-price
@@ -67,6 +69,31 @@ function pasteBrand(product) {
 	} catch (error) {
 		
 	}
+
+}
+
+
+function selectFormat(format){
+	var select = document.getElementById("format");
+	select.value = format;
+}
+
+
+function applyPromotedListing(){
+	var promotedListingCheckbox =  document.getElementById("optinCheckbox");
+	promotedListingCheckbox.click();
+
+
+	var adRateElement = document.getElementById("adRate");
+	adRateElement.value = 1.2;
+
+	var evt = document.createEvent("HTMLEvents");
+	evt.initEvent("change", false, true);
+
+
+	var evt = new Event("input", {"bubbles":true, "cancelable":true});
+	adRateElement.dispatchEvent(evt);
+	
 
 }
 
